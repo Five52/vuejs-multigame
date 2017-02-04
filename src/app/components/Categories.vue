@@ -1,14 +1,14 @@
 <template>
-  <wrapper>
+  <div class="wrapper">
     <div class="categories">
-      <mode>
+      <div class="mode">
         <h2>Apprentissage</h2>
-      </mode>
-      <mode>
+      </div>
+      <div class="mode">
         <h2>Evaluation</h2>
-      </mode>
+      </div>
     </categories>
-  </wrapper>
+  </div>
 </template>
 
 <script>
@@ -25,7 +25,7 @@
     height: 75%;
   }
 
-  .categories mode {
+  .categories .mode {
     cursor: pointer;
     width: 250px;
     background-color: #329AF0;

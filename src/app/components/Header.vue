@@ -1,17 +1,13 @@
 <template>
   <header>
-    <wrapper>
+    <div class="wrapper">
       <h1>Multiply</h1>
-    </wrapper>
+    </div>
   </header>
 </template>
 
 <script>
-export default {
-  name: 'Header'
-};
+  export default {
+    name: 'Header'
+  };
 </script>
-
-<style>
-
-</style>
