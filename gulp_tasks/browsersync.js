@@ -1,3 +1,5 @@
+// @flow
+
 const gulp = require('gulp');
 const browserSync = require('browser-sync');
 const spa = require('browser-sync-spa');

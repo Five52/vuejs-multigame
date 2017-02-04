@@ -1,0 +1,7 @@
+[ignore]
+.*/node_modules/config-chain/test/.*
+.*/node_modules/vue-resource/test/data/.*
+.*/node_modules/vue-router/src/.*
+.*/node_modules/vue/src/.*
+
+[include]

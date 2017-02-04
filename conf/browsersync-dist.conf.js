@@ -1,6 +1,8 @@
+// @flow
+
 const conf = require('./gulp.conf');
 
-module.exports = function () {
+module.exports = () => {
   return {
     server: {
       baseDir: [

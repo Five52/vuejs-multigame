@@ -1,5 +1,3 @@
-'use strict';
-
 /**
  *  This file contains the variables used in other gulp files
  *  which defines tasks
@@ -23,8 +21,8 @@ exports.paths = {
 };
 
 /**
-* used on gulp dist
-*/
+ * used on gulp dist
+ */
 exports.htmlmin = {
   ignoreCustomFragments: [/{{.*?}}/]
 };
@@ -44,8 +42,8 @@ for (const pathName in exports.paths) {
 /**
  *  Common implementation for an error handler of a Gulp plugin
  */
-exports.errorHandler = function (title) {
-  return function (err) {
+exports.errorHandler = function(title :string) {
+  return function(err) {
     gutil.log(gutil.colors.red(`[${title}]`), err.toString());
     this.emit('end');
   };
