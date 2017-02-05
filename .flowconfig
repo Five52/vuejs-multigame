@@ -4,4 +4,7 @@
 .*/node_modules/vue-router/src/.*
 .*/node_modules/vue/src/.*
 
-[include]
+[options]
+unsafe.enable_getters_and_setters=true
+module.file_ext=.vue
+module.file_ext=.js

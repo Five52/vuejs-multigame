@@ -1,3 +1,5 @@
+// @flow
+
 import Vue from 'vue';
 import {router} from './app/app.routes.js';
 import AppComponent from './app/app.component.vue';
