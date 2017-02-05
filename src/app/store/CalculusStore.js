@@ -1,30 +1,35 @@
+// @flow
+
 import Calculus from './Calculus';
 
 class CalculusStore {
-  static get LAST_TABLE() { return 12 };
+  static LAST_TABLE = 12;
+  _operations = [];
 
-  constructor() {
-    this.operations = [];
-  }
-
-  addResult(c : Calculus) {
-    this.operations[c.firstOperand] = this.operations[c.firstOperand] || [];
-    this.operations[c.firstOperand][c.secondOperand] = this.operations[c.firstOperand][c.secondOperand] || [];
-    this.operations[c.firstOperand][c.secondOperand] = {
+  addResult(c: Calculus): void {
+    this._operations[c.firstOperand] = this._operations[c.firstOperand] || [];
+    this._operations[c.firstOperand][c.secondOperand] = this._operations[c.firstOperand][c.secondOperand] || [];
+    this._operations[c.firstOperand][c.secondOperand] = {
       result: c.result,
       time: c.time
     };
   }
 
-  static generateRandomOperation(firstOperand) {
-    firstOperand = firstOperand
-      || CalculusStore.getRandomTableNumber()
-    ;
-    secondOperand = CalculusStore.getRandomTableNumber();
+  generateRandomOperation(firstOperand?: number, secondOperand?: number): Calculus {
+    if (firstOperand === undefined) {
+      firstOperand = CalculusStore.getRandomTableNumber();
+    }
+
+    if (secondOperand === undefined) {
+      secondOperand = CalculusStore.getRandomTableNumber();
+    }
+
+    return new Calculus(firstOperand, secondOperand);
   }
 
-  static getRandomTableNumber() {
+  static getRandomTableNumber(): number {
     return Math.floor(Math.random() * (CalculusStore.LAST_TABLE + 1));
   }
 }
+
 export default new CalculusStore();

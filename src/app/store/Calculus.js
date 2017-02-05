@@ -1,14 +1,39 @@
-export default class Calculus {
+// @flow
 
-  constructor(firstOperand, secondOperand, result, time) {
+export default class Calculus {
+  _firstOperand: number;
+  _secondOperand: number;
+  _result: number;
+  _time: number;
+
+  constructor(firstOperand: number, secondOperand: number) {
     this._firstOperand = firstOperand;
     this._secondOperand = secondOperand;
-    this._result = result;
-    this._time = time;
   }
 
-  get firstOperand() { return this._firstOperand; }
-  get secondOperand() { return this._secondOperand; }
-  get result() { return this._result; }
-  get time() { return this._time; }
+  get firstOperand(): number {
+    return this._firstOperand;
+  }
+
+  get secondOperand(): number {
+    return this._secondOperand;
+  }
+
+  get result(): number {
+    return this._result;
+  }
+
+  set result(result: number): this {
+    this._result = result;
+    return this;
+  }
+
+  get time(): number {
+    return this._time;
+  }
+
+  set time(time: number): this {
+    this._time = time;
+    return this;
+  }
 }
