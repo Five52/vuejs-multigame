@@ -4,15 +4,23 @@ import Calculus from './Calculus';
 
 class CalculusStore {
   static LAST_TABLE = 12;
-  _operations: Array<Array<Array<{result: number, time: number}>>>;
+  _operations: {
+    [number]: {
+      [number]: Array<{result: number, time: number}>
+    }
+  };
 
   constructor() {
-    this._operations = JSON.parse(localStorage.getItem(this.constructor.name) || '[]');
+    try {
+      this._operations = JSON.parse(localStorage.getItem(this.constructor.name) || '{}');
+    } catch (e) {
+      this._operations = {};
+    }
   }
 
   addResult(c: Calculus): void {
-    if (!Array.isArray(this._operations[c.firstOperand])) {
-      this._operations[c.firstOperand] = [];
+    if (!(this._operations[c.firstOperand] instanceof Object)) {
+      this._operations[c.firstOperand] = {};
     }
     if (!Array.isArray(this._operations[c.firstOperand][c.secondOperand])) {
       this._operations[c.firstOperand][c.secondOperand] = [];
