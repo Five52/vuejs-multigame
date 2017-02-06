@@ -12,8 +12,13 @@
 </template>
 
 <script>
+  import GlobalStore from '../store/GlobalStore';
+
   export default {
-    name: 'Categories'
+    name: 'Categories',
+    created() {
+      GlobalStore.title = 'Multiply';
+    }
   };
 </script>
 
