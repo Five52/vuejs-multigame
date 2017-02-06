@@ -18,3 +18,9 @@
     }
   };
 </script>
+
+<style scoped>
+  h1 {
+    display: inline-block;
+  }
+</style>
