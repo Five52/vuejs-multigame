@@ -9,19 +9,18 @@
 </template>
 
 <script>
-  import Header from './components/Header.vue';
-  import Footer from './components/Footer.vue';
+  import AppHeader from './components/Header.vue';
+  import AppFooter from './components/Footer.vue';
 
   export default {
-    name: 'Main',
     components: {
-      'app-header': Header,
-      'app-footer': Footer
+      AppHeader,
+      AppFooter
     }
   };
 </script>
 
-<style lang="css">
+<style lang="scss">
   html {
     height: 100%;
   }

@@ -48,7 +48,7 @@
     "build": "gulp",
     "serve": "gulp serve",
     "serve:dist": "gulp serve:dist",
-    "test": "eslint src; flow; exit 0"
+    "test": "eslint src --fix; flow; exit 0"
   },
   "eslintConfig": {
     "root": true,

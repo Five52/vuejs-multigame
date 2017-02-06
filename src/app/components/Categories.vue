@@ -17,7 +17,7 @@
   };
 </script>
 
-<style lang="sass">
+<style lang="scss" scoped>
   .categories {
     display: flex;
     align-items: center;

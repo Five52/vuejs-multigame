@@ -36,9 +36,13 @@ module.exports = {
       ]
     }, {
       test: /.vue$/,
-      loaders: [
-        'vue-loader'
-      ]
+      loader: 'vue-loader',
+      options: {
+        loaders: {
+          scss: 'vue-style-loader!css-loader?minimize!sass-loader!postcss-loader',
+          sass: 'vue-style-loader!css-loader?minimize!sass-loader!postcss-loader'
+        }
+      }
     }]
   },
   plugins: [

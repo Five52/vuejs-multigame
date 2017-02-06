@@ -4,15 +4,26 @@ import Calculus from './Calculus';
 
 class CalculusStore {
   static LAST_TABLE = 12;
-  _operations = [];
+  _operations: Array<Array<Array<{result: number, time: number}>>>;
+
+  constructor() {
+    this._operations = JSON.parse(localStorage.getItem(this.constructor.name) || '[]');
+  }
 
   addResult(c: Calculus): void {
-    this._operations[c.firstOperand] = this._operations[c.firstOperand] || [];
-    this._operations[c.firstOperand][c.secondOperand] = this._operations[c.firstOperand][c.secondOperand] || [];
-    this._operations[c.firstOperand][c.secondOperand] = {
+    if (!Array.isArray(this._operations[c.firstOperand])) {
+      this._operations[c.firstOperand] = [];
+    }
+    if (!Array.isArray(this._operations[c.firstOperand][c.secondOperand])) {
+      this._operations[c.firstOperand][c.secondOperand] = [];
+    }
+
+    this._operations[c.firstOperand][c.secondOperand].push({
       result: c.result,
       time: c.time
-    };
+    });
+
+    localStorage.setItem(this.constructor.name, JSON.stringify(this._operations));
   }
 
   generateRandomOperation(firstOperand?: number, secondOperand?: number): Calculus {
