@@ -2,13 +2,15 @@
 
 import CalculusStore from './CalculusStore';
 
+type Answer = {value: number};
+
 export default class Calculus {
   _firstOperand: number;
   _secondOperand: number;
   _answer: number;
   _time: number;
   _isPractise: boolean;
-  _answers: Array<number>;
+  _answers: Array<Answer>;
 
   constructor(firstOperand: number, secondOperand: number, isPractise: boolean = false) {
     this._firstOperand = firstOperand;
@@ -46,7 +48,7 @@ export default class Calculus {
     return this;
   }
 
-  get answers(): Array<number> {
+  get answers(): Array<Answer> {
     if (!this._answers) {
       this._answers = this._generateRandomAnswers(this._isPractise);
     }
@@ -58,7 +60,7 @@ export default class Calculus {
    * @param {boolean} tableRelated - true if the answers must be related to the first operand
    * @return {Array<Number>}
    */
-  _generateRandomAnswers(tableRelated: boolean = false): Array<number> {
+  _generateRandomAnswers(tableRelated: boolean = false): Array<Answer> {
     const answers = [this.firstOperand * this.secondOperand];
     if (tableRelated) {
       for (let i = 0; i < 3; i++) {
@@ -83,7 +85,11 @@ export default class Calculus {
         answers.push(answer);
       }
     }
-    return this.shuffle(answers);
+    return this.shuffle(answers).map(value => {
+      return {
+        value
+      };
+    });
   }
 
   shuffle(array: Array<number>) {
