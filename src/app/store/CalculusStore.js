@@ -26,14 +26,12 @@ class CalculusStore {
     localStorage.setItem(this.constructor.name, JSON.stringify(this._operations));
   }
 
-  generateRandomOperation(firstOperand?: number, secondOperand?: number): Calculus {
+  generateRandomCalculus(firstOperand?: number): Calculus {
     if (firstOperand === undefined) {
       firstOperand = CalculusStore.getRandomTableNumber();
     }
 
-    if (secondOperand === undefined) {
-      secondOperand = CalculusStore.getRandomTableNumber();
-    }
+    const secondOperand = CalculusStore.getRandomTableNumber();
 
     return new Calculus(firstOperand, secondOperand);
   }
