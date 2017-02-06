@@ -7,10 +7,13 @@ export default class Calculus {
   _secondOperand: number;
   _answer: number;
   _time: number;
+  _isPractise: boolean;
+  _answers: Array<number>;
 
-  constructor(firstOperand: number, secondOperand: number) {
+  constructor(firstOperand: number, secondOperand: number, isPractise: boolean = false) {
     this._firstOperand = firstOperand;
     this._secondOperand = secondOperand;
+    this._isPractise = isPractise;
   }
 
   get firstOperand(): number {
@@ -43,7 +46,19 @@ export default class Calculus {
     return this;
   }
 
-  generateRandomAnswers(tableRelated: boolean = false): Array<number> {
+  get answers(): Array<number> {
+    if (!this._answers) {
+      this._answers = this._generateRandomAnswers(this._isPractise);
+    }
+    return this._answers;
+  }
+
+  /**
+   * Generate 4 random answers
+   * @param {boolean} tableRelated - true if the answers must be related to the first operand
+   * @return {Array<Number>}
+   */
+  _generateRandomAnswers(tableRelated: boolean = false): Array<number> {
     const answers = [this.firstOperand * this.secondOperand];
     if (tableRelated) {
       for (let i = 0; i < 3; i++) {
