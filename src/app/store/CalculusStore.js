@@ -50,3 +50,4 @@ class CalculusStore {
 }
 
 export default new CalculusStore();
+export const maxTable = CalculusStore.LAST_TABLE;
