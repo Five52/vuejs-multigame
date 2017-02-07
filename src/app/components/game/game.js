@@ -1,7 +1,7 @@
 // @flow
 
 import CalculusStore from '../../store/CalculusStore';
-const nbCalculus = 2;
+const nbCalculus = 10;
 
 export default {
   name: 'Game',
