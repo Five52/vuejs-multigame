@@ -27,7 +27,7 @@ class CalculusStore {
     }
 
     this._operations[c.firstOperand][c.secondOperand].push({
-      result: c.result,
+      result: c.answer,
       time: c.time
     });
 
