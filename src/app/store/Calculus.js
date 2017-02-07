@@ -61,31 +61,62 @@ export default class Calculus {
    * @return {Array<Number>}
    */
   _generateRandomAnswers(tableRelated: boolean = false): Array<Answer> {
-    const answers = [this.firstOperand * this.secondOperand];
     if (tableRelated) {
-      for (let i = 0; i < 3; i++) {
-        let answer;
-        do {
-          answer = this.firstOperand * CalculusStore.constructor.getRandomTableNumber();
-        } while (answers.includes(answer));
-        answers.push(answer);
-      }
-    } else {
-      for (let i = 0; i < 3; i++) {
-        let answer;
-        do {
-          const changeFirstOperation = Math.random() < 0.5;
-          const delta = Math.pow(-1, Math.floor(Math.random() * 2));
-          if (changeFirstOperation) {
-            answer = (this.firstOperand + delta) * this.secondOperand;
-          } else {
-            answer = (this.secondOperand + delta) * this.firstOperand;
-          }
-        } while (answers.includes(answer));
-        answers.push(answer);
-      }
+      return this._generateRandomRelatedAnswers();
+    }
+    return this._generateRandomUnrelatedAnswers();
+  }
+
+  _generateRandomRelatedAnswers() {
+    const answers = [this.result];
+    for (let i = 0; i < 3; i++) {
+      let answer;
+      do {
+        answer = this.firstOperand * CalculusStore.constructor.getRandomTableNumber();
+      } while (answers.includes(answer));
+      answers.push(answer);
     }
     return this.shuffle(answers).map(value => {
+      return {
+        value
+      };
+    });
+  }
+
+  _generateRandomUnrelatedAnswers() {
+    const answers = [];
+    let answer: number;
+    for (let i = this._firstOperand - 1; i <= this._firstOperand + 1; i++) {
+      for (let j = this._secondOperand - 1; j <= this._secondOperand + 1; j++) {
+        answer = i * j;
+        if (answer >= 0 && !answers.includes(answer) && answer !== this.result) {
+          answers.push(answer);
+        }
+      }
+    }
+    answer = Math.floor((Math.max(...answers) + Math.min(...answers)) / 2);
+    if (!answers.includes(answer) && answer !== this.result) {
+      answers.push(answer);
+    }
+    let delta = 1;
+    while (answers.length < 4) {
+      const answerMinus = answers[0] - delta;
+      const answerPlus = answers[0] + delta;
+      if (!answers.includes(answerPlus) && answerPlus !== this.result) {
+        answers.push(answerPlus);
+      }
+      if (answerMinus >= 0 &&
+        !answers.includes(answerMinus) &&
+        answerMinus !== this.result) {
+        answers.push(answerMinus);
+      }
+      delta++;
+    }
+
+    return this.shuffle(
+      [this.result]
+      .concat(this.shuffle(answers).slice(0, 3))
+    ).map(value => {
       return {
         value
       };

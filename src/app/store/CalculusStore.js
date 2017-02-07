@@ -35,13 +35,12 @@ class CalculusStore {
   }
 
   generateRandomCalculus(firstOperand?: number): Calculus {
-    if (firstOperand === undefined) {
-      firstOperand = CalculusStore.getRandomTableNumber();
-    }
+    const isPractise = firstOperand !== undefined;
+    const operand = firstOperand || CalculusStore.getRandomTableNumber();
 
     const secondOperand = CalculusStore.getRandomTableNumber();
 
-    return new Calculus(firstOperand, secondOperand);
+    return new Calculus(operand, secondOperand, isPractise);
   }
 
   static getRandomTableNumber(): number {
