@@ -12,6 +12,7 @@ export default {
       index: 0,
       completed: 0,
       nbCorrect: 0,
+      alreadyAnswered: false,
       answered: false,
       calculus: null,
       currentTime: 0,
@@ -21,10 +22,16 @@ export default {
   },
 
   created() {
+    // Display the first calculus
     this.next();
   },
 
   methods: {
+    /**
+     * Check and store the answer
+     * @param {Event} e The event
+     * @param {Object} answer The answer
+     */
     checkAnswer(e: Event, answer: Object): void {
       if (this.answered) {
         return;
@@ -33,31 +40,35 @@ export default {
       const time = Math.round((Date.now() - this.currentTime) / 1000);
       this.calculus.time = time;
       this.totalTime += time;
-      // Store the answer on store
+
+      // Store the answer
       CalculusStore.addResult(this.calculus);
 
       // Display the answer validity
       if (this.calculus.isCorrect()) {
-        this.nbCorrect++;
+        if (!this.alreadyAnswered) {
+          this.nbCorrect++;
+        }
         answer.class = 'correct';
+        this.answered = true;
+        this.completed++;
       } else {
         answer.class = 'incorrect';
       }
-      this.calculus.answers.forEach(answer => {
-        if (answer.value === this.calculus.result) {
-          answer.class = 'correct';
-        }
-      });
 
-      // Highlight the correct answer
-      this.answered = true;
-      this.completed++;
+      this.alreadyAnswered = true;
     },
 
+    /**
+     * Restart the game
+     */
     retry(): void {
       location.reload();
     },
 
+    /**
+     * Go to the next question
+     */
     next(): void {
       this.answered = false;
       if (this.index < nbCalculus) {
@@ -67,14 +78,30 @@ export default {
         }
         this.index++;
         this.calculus = CalculusStore.generateRandomCalculus(table);
+        this.alreadyAnswered = false;
         this.currentTime = Date.now();
       }
     }
   },
 
   computed: {
+    /**
+     * Check if the game is finished
+     * @return {boolean} The finished status
+     */
     finished(): boolean {
       return !this.answered && this.completed === nbCalculus;
+    },
+
+    /**
+     * Get the displayed result
+     * @return {string} The result
+     */
+    result(): string {
+      if (!this.answered || !this.calculus.isCorrect()) {
+        return '?';
+      }
+      return this.calculus.answer;
     }
   }
 };

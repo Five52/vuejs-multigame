@@ -2,7 +2,7 @@
   <div>
     <div class="game" v-show="!finished">
       <div class="question">
-        <span class="calculus">{{ calculus.firstOperand }} x {{ calculus.secondOperand }} = {{ calculus.answer || '?' }}</span>
+        <span class="calculus">{{ calculus.firstOperand }} x {{ calculus.secondOperand }} = {{ result }}</span>
       </div>
       <div class="answers" :class="{ answered }">
         <div
