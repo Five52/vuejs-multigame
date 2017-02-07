@@ -36,6 +36,15 @@ app-root {
 main {
   display: flex;
   flex: 1;
+  padding-bottom: 60px;
+}
+
+.postit {
+  background-color: $yellow-color;
+  color: $secondary-color;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  padding: .05em .2em;
 }
 
 h1,

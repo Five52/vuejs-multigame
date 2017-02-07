@@ -11,12 +11,17 @@ const autoprefixer = require('autoprefixer');
 module.exports = {
   module: {
     loaders: [{
-      test: /.json$/,
+      test: /\.json$/,
       loaders: [
         'json-loader'
       ]
     }, {
-      test: /.js$/,
+      test: /\.png$/,
+      loaders: [
+        "file-loader?name=/[path][name].[ext]&context=./src"
+      ]
+    }, {
+      test: /\.js$/,
       exclude: /node_modules/,
       loader: 'eslint-loader',
       enforce: 'pre'
@@ -35,7 +40,7 @@ module.exports = {
         'babel-loader'
       ]
     }, {
-      test: /.vue$/,
+      test: /\.vue$/,
       loader: 'vue-loader',
       options: {
         loaders: {

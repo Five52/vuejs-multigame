@@ -3,12 +3,5 @@
   "plugins" : [
     "transform-flow-strip-types",
     "babel-plugin-transform-class-properties"
-  ],
-  "env": {
-    "production": {
-      "presets": [
-        [ "es2015", { "modules": false } ]
-      ]
-    }
-  }
+  ]
 }

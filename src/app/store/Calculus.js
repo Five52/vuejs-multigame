@@ -55,6 +55,10 @@ export default class Calculus {
     return this._answers;
   }
 
+  isCorrect(): boolean {
+    return this.answer === this.result;
+  }
+
   /**
    * Generate 4 random answers
    * @param {boolean} tableRelated - true if the answers must be related to the first operand
