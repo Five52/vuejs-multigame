@@ -2,6 +2,7 @@ $white-color: #FFF;
 $primary-color: #54e074;
 $secondary-color: #424858;
 $yellow-color: #ffec99;
+$purple-color: #966bff;
 
 
 html {
@@ -16,6 +17,10 @@ body {
   color: $secondary-color;
   font-family: 'Open Sans', sans-serif;
   min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .wrapper {
@@ -56,4 +61,23 @@ h3 {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.btn {
+  background-color: $white-color;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #DDD;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover {
+    transition-duration: 0s;
+    background-color: darken($white-color, 8%);
+  }
+
+  &:active {
+    transition-duration: 0s;
+    background-color: darken($white-color, 12%);
+  }
 }

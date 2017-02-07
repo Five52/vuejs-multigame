@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="tables">
       <div v-for="table in maxTable">
-        <router-link :to="{name: 'practice', params: { id: table}}">
+        <router-link :to="{name: 'practice', params: {id: table}}">
           <div class="table">{{ table }}</div>
         </router-link>
       </div>
@@ -50,6 +50,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: box-shadow .1s;
 
     &:hover {
       box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);

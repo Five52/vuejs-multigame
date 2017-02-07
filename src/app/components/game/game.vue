@@ -17,6 +17,10 @@
       <img src="./silver.png" v-if="nbCorrect/nbCalculus >= .5 && nbCorrect/nbCalculus < .9">
       <img src="./gold.png" v-if="nbCorrect/nbCalculus >= .9">
       <div>Tu as {{ nbCorrect }} bonne{{ nbCorrect > 1 ? 's' : '' }} réponse{{ nbCorrect > 1 ? 's' : '' }} sur {{ nbCalculus }} !</div>
+      <div class="buttons">
+        <router-link class="btn" :to="{name: 'home'}">Retour à l'accueil</router-link>
+        <span @click="retry()" class="btn">Réessayer</span>
+      </div>
     </div>
     <div class="progress">
       <span>{{ index }}/{{ nbCalculus }}</span>
@@ -63,7 +67,7 @@
     border: 1px solid #DDD;
     border-radius: 4px;
     font-size: 2em;
-    transition: background-color .2s;
+    transition: background-color .25s;
 
     .answered & {
       cursor: default;
@@ -78,25 +82,36 @@
     }
 
     .answers:not(.answered) &:not(.correct):not(.incorrect):hover {
+      transition-duration: 0s;
       background-color: #a3daff;
     }
   }
 
-  .next {
-    $bgc: #32e261;
+  .buttons {
+    margin-top: 1.5em;
+    display: flex;
+    justify-content: center;
 
-    cursor: pointer;
-    padding: 1em;
-    border: 1px solid #DDD;
+    .btn {
+      margin: 0 2px;
+    }
+  }
+
+  .next {
+    @extend .btn;
+    $bgc: $purple-color;
+
     background-color: $bgc;
-    border-radius: 4px;
-    font-weight: 600;
+    color: $white-color;
     float: right;
     margin-top: 10px;
-    transition: background-color .2s;
 
     &:hover {
-      background-color: lighten($bgc, 15%);
+      background-color: lighten($bgc, 4%);
+    }
+
+    &:active {
+      background-color: darken($bgc, 4%);
     }
   }
 
@@ -118,7 +133,7 @@
 
     span {
       transition: width .2s ease-out;
-      background-color: #966bff;
+      background-color: $purple-color;
       width: 33%;
       display: block;
       height: 100%;

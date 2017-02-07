@@ -51,6 +51,10 @@ export default {
       this.completed++;
     },
 
+    retry(): void {
+      location.reload();
+    },
+
     next(): void {
       this.answered = false;
       if (this.index < nbCalculus) {
