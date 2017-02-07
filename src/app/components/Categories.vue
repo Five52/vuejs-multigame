@@ -4,7 +4,9 @@
       <router-link :to="{name: 'tables'}">
         <div class="category learn">Apprentissage</div>
       </router-link>
-      <div class="category test">Evaluation</div>
+      <router-link :to="{name: 'test'}">
+        <div class="category test">Evaluation</div>
+      </router-link>
     </categories>
   </div>
 </template>
