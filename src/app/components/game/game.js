@@ -14,7 +14,8 @@ export default {
       nbCorrect: 0,
       answered: false,
       calculus: null,
-      time: 0,
+      currentTime: 0,
+      totalTime: 0,
       nbCalculus
     };
   },
@@ -29,7 +30,9 @@ export default {
         return;
       }
       this.calculus.answer = answer.value;
-      this.calculus.time = Math.round((Date.now() - this.time) / 1000);
+      const time = Math.round((Date.now() - this.currentTime) / 1000);
+      this.calculus.time = time;
+      this.totalTime += time;
       // Store the answer on store
       CalculusStore.addResult(this.calculus);
 
@@ -64,7 +67,7 @@ export default {
         }
         this.index++;
         this.calculus = CalculusStore.generateRandomCalculus(table);
-        this.time = Date.now();
+        this.currentTime = Date.now();
       }
     }
   },

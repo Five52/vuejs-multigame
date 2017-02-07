@@ -12,11 +12,11 @@
       </div>
     </div>
     <div class="finish" v-show="finished">
-      <h2>Exercice terminé</h2>
+      <h2>Exercice terminé en <strong>{{ totalTime }} secondes</strong></h2>
       <img src="./bronze.png" v-if="nbCorrect/nbCalculus < .5">
       <img src="./silver.png" v-if="nbCorrect/nbCalculus >= .5 && nbCorrect/nbCalculus < .9">
       <img src="./gold.png" v-if="nbCorrect/nbCalculus >= .9">
-      <div>Tu as {{ nbCorrect }} bonne{{ nbCorrect > 1 ? 's' : '' }} réponse{{ nbCorrect > 1 ? 's' : '' }} sur {{ nbCalculus }} !</div>
+      <div>Tu as <strong>{{ nbCorrect }} bonne{{ nbCorrect > 1 ? 's' : '' }} réponse{{ nbCorrect > 1 ? 's' : '' }}</strong> sur {{ nbCalculus }} !</div>
       <div class="buttons">
         <router-link class="btn" :to="{name: 'home'}">Retour à l'accueil</router-link>
         <span @click="retry()" class="btn">Réessayer</span>
