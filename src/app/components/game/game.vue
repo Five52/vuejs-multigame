@@ -18,7 +18,7 @@
       <img src="./gold.png" v-if="nbCorrect/nbCalculus >= .9">
       <div>Tu as <strong>{{ nbCorrect }} bonne{{ nbCorrect > 1 ? 's' : '' }} réponse{{ nbCorrect > 1 ? 's' : '' }}</strong> sur {{ nbCalculus }} !</div>
       <div class="buttons">
-        <router-link class="btn" :to="{name: 'home'}">Retour à l'accueil</router-link>
+        <router-link class="btn" :to="{name: 'home'}" replace>Retour à l'accueil</router-link>
         <span @click="retry()" class="btn">Réessayer</span>
       </div>
     </div>
