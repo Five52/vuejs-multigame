@@ -1,6 +1,6 @@
 // @flow
 
-import CalculusStore from './CalculusStore';
+import {maxTable} from './CalculusStore';
 
 type Answer = {value: number};
 
@@ -72,13 +72,9 @@ export default class Calculus {
   }
 
   _generateRandomRelatedAnswers() {
-    const answers = [this.result];
-    for (let i = 0; i < 3; i++) {
-      let answer;
-      do {
-        answer = this.firstOperand * CalculusStore.constructor.getRandomTableNumber();
-      } while (answers.includes(answer));
-      answers.push(answer);
+    const answers = [];
+    for (let i = 0; i <= maxTable; i++) {
+      answers.push(this.firstOperand * i);
     }
     return this.shuffle(answers).map(value => {
       return {
