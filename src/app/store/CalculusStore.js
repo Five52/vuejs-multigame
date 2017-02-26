@@ -19,26 +19,31 @@ class CalculusStore {
     }
   }
 
-  getResults(firstOperand: number, secondOperand: number): Array<Object> {
-    if (this._operations[firstOperand] === undefined) {
-      return [];
-    }
-    let result = this._operations[firsOperand][secondOperand];
-    return (result === undefined) ? result : [];
-
-  }
-
   static get maxAnwserTime(): number {
     return 4;
   }
 
-  getResults(firstOperand: number, secondOperand: number): Array<Object> {
-    if (this._operations[firstOperand] === undefined) {
-      return [];
-    }
-    let result = this._operations[firsOperand][secondOperand];
-    return (result === undefined) ? result : [];
+  getResults(firstOperand: number, secondOperand: number): Object | null {
+    if (this._operations[firstOperand] !== undefined && this._operations[firstOperand][secondOperand] !== undefined) {
+      const operations = this._operations[firstOperand][secondOperand];
+      const correctAnswers = operations.reduce((sum, operation) => {
+        const calculus = new Calculus(firstOperand, secondOperand);
+        calculus.answer = operation.result;
+        calculus.time = operation.time;
 
+        if (calculus.isAnsweredInTime()) {
+          sum.fast++;
+        } else if (calculus.isCorrect()) {
+          sum.good++;
+        }
+        return sum;
+      }, {fast: 0, good: 0});
+      return {
+        correctAnswers,
+        nbOperation: operations.length
+      };
+    }
+    return null;
   }
 
   addResult(c: Calculus): void {
