@@ -32,6 +32,15 @@ class CalculusStore {
     return 4;
   }
 
+  getResults(firstOperand: number, secondOperand: number): Array<Object> {
+    if (this._operations[firstOperand] === undefined) {
+      return [];
+    }
+    let result = this._operations[firsOperand][secondOperand];
+    return (result === undefined) ? result : [];
+
+  }
+
   addResult(c: Calculus): void {
     if (!(this._operations[c.firstOperand] instanceof Object)) {
       this._operations[c.firstOperand] = {};
