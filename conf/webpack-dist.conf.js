@@ -20,7 +20,7 @@ module.exports = {
     }, {
       test: /\.png$/,
       loaders: [
-        "file-loader?name=/[path][name].[ext]&context=./src"
+        "file-loader?name=/vue/[path][name].[ext]&context=./src"
       ]
     }, {
       test: /\.js$/,
