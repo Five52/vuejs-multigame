@@ -105,7 +105,7 @@ export default class Calculus {
     let delta = 1;
     while (answers.length < 4) {
       const answerMinus = answer - delta;
-      const answerPlus = answers + delta;
+      const answerPlus = answer + delta;
       if (!answers.includes(answerPlus) && answerPlus !== this.result) {
         answers.push(answerPlus);
       }
