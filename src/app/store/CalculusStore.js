@@ -3,7 +3,7 @@
 import Calculus from './Calculus';
 
 class CalculusStore {
-  static LAST_TABLE = 12;
+  static LAST_TABLE = 9;
   _operations: {
     [number]: {
       [number]: Array<{result: number, time: number}>
