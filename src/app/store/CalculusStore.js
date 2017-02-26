@@ -73,15 +73,18 @@ class CalculusStore {
   }
 
   generateRandomCalculus(operand?: number): Calculus {
-    const storedIncorrectCalculuses = this.getMostIncorrectCalculuses();
-    // Return a previously bad answered calculus
-    if (Math.random() <= 0.3 && storedIncorrectCalculuses.length) {
-      return storedIncorrectCalculuses[0];
+    const isPractise = operand !== undefined;
+
+    if (!isPractise) {
+      const storedIncorrectCalculuses = this.getMostIncorrectCalculuses();
+      // Return a previously bad answered calculus
+      if (Math.random() <= 0.3 && storedIncorrectCalculuses.length) {
+        return storedIncorrectCalculuses[0];
+      }
     }
 
     const firstOperand = operand || CalculusStore.getRandomTableNumber();
     const secondOperand = CalculusStore.getRandomTableNumber();
-    const isPractise = operand !== undefined;
 
     return new Calculus(firstOperand, secondOperand, isPractise);
   }
