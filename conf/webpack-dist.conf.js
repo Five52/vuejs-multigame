@@ -79,7 +79,7 @@ module.exports = {
   ],
   output: {
     path: path.join(process.cwd(), conf.paths.dist),
-    filename: '/[name].js'
+    filename: '[name].js'
   },
   entry: {
     app: `./${conf.path.src('index')}`,
