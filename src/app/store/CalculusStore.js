@@ -4,6 +4,7 @@ import Calculus from './Calculus';
 
 class CalculusStore {
   static LAST_TABLE = 9;
+  static MAX_PREDICTION_NUMBER = 5;
   _operations: {
     [number]: {
       [number]: Array<{result: number, time: number}>
@@ -16,6 +17,10 @@ class CalculusStore {
     } catch (e) {
       this._operations = {};
     }
+  }
+
+  static get maxAnwserTime(): number {
+    return 4;
   }
 
   addResult(c: Calculus): void {
@@ -34,13 +39,51 @@ class CalculusStore {
     localStorage.setItem(this.constructor.name, JSON.stringify(this._operations));
   }
 
-  generateRandomCalculus(firstOperand?: number): Calculus {
-    const isPractise = firstOperand !== undefined;
-    const operand = firstOperand || CalculusStore.getRandomTableNumber();
+  getMostIncorrectCalculuses(): Array<Calculus> {
+    const calculuses: Array<Calculus> = [];
 
+    for (const firstKey in this._operations) {
+      if (this._operations.hasOwnProperty(firstKey)) {
+        const firstOperand = Number(firstKey);
+
+        for (const secondKey in this._operations[firstOperand]) {
+          if (this._operations[firstOperand].hasOwnProperty(secondKey)) {
+            const secondOperand = Number(secondKey);
+
+            const atLeastOneIncorrect = this._operations[firstOperand][secondOperand]
+               // The MAX_PREDICTION_NUMBER last element of the array
+              .slice(-CalculusStore.MAX_PREDICTION_NUMBER)
+              // Check if at least one result is incorrect
+              .some(operation => {
+                const calculus = new Calculus(firstOperand, secondOperand);
+                calculus.answer = operation.result;
+                calculus.time = operation.time;
+                return calculus.isCorrect() || calculus.isAnsweredInTime();
+              });
+
+            if (atLeastOneIncorrect) {
+              calculuses.push(new Calculus(firstOperand, secondOperand));
+            }
+          }
+        }
+      }
+    }
+
+    return shuffle(calculuses);
+  }
+
+  generateRandomCalculus(operand?: number): Calculus {
+    const storedIncorrectCalculuses = this.getMostIncorrectCalculuses();
+    // Return a previously bad answered calculus
+    if (Math.random() <= 0.3 && storedIncorrectCalculuses.length) {
+      return storedIncorrectCalculuses[0];
+    }
+
+    const firstOperand = operand || CalculusStore.getRandomTableNumber();
     const secondOperand = CalculusStore.getRandomTableNumber();
+    const isPractise = operand !== undefined;
 
-    return new Calculus(operand, secondOperand, isPractise);
+    return new Calculus(firstOperand, secondOperand, isPractise);
   }
 
   static getRandomTableNumber(): number {
@@ -48,5 +91,19 @@ class CalculusStore {
   }
 }
 
+function shuffle(array: Array<any>): Array<any> {
+  let m = array.length;
+  let t;
+  let i;
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+  return array;
+}
+
 export default new CalculusStore();
 export const maxTable = CalculusStore.LAST_TABLE;
+export const maxAnwserTime = CalculusStore.maxAnwserTime;

@@ -1,6 +1,6 @@
 // @flow
 
-import {maxTable} from './CalculusStore';
+import {maxTable, maxAnwserTime} from './CalculusStore';
 
 type Answer = {value: number};
 
@@ -57,6 +57,10 @@ export default class Calculus {
 
   isCorrect(): boolean {
     return this.answer === this.result;
+  }
+
+  isAnsweredInTime(): boolean {
+    return this.time < maxAnwserTime;
   }
 
   /**
