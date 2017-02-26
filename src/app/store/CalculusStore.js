@@ -18,6 +18,15 @@ class CalculusStore {
     }
   }
 
+  getResults(firstOperand: number, secondOperand: number): Array<Object> {
+    if (this._operations[firstOperand] === undefined) {
+      return [];
+    }
+    let result = this._operations[firsOperand][secondOperand];
+    return (result === undefined) ? result : [];
+
+  }
+
   addResult(c: Calculus): void {
     if (!(this._operations[c.firstOperand] instanceof Object)) {
       this._operations[c.firstOperand] = {};
@@ -44,7 +53,7 @@ class CalculusStore {
   }
 
   static getRandomTableNumber(): number {
-    return Math.floor(Math.random() * (CalculusStore.LAST_TABLE + 1));
+    return Math.ceil(Math.random() * (CalculusStore.LAST_TABLE));
   }
 }
 

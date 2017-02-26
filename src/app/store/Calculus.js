@@ -100,8 +100,8 @@ export default class Calculus {
     }
     let delta = 1;
     while (answers.length < 4) {
-      const answerMinus = answers[0] - delta;
-      const answerPlus = answers[0] + delta;
+      const answerMinus = answer - delta;
+      const answerPlus = answers + delta;
       if (!answers.includes(answerPlus) && answerPlus !== this.result) {
         answers.push(answerPlus);
       }
