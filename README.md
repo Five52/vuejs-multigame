@@ -4,6 +4,9 @@
  - [`Vue.js`](https://vuejs.org)
  - [`SASS`](http://sass-lang.com/)
  - [`Babel`](https://babeljs.io/)
+ - [`webpack`](https://webpack.github.io/docs/)
+ - [`Browsersync`](https://www.browsersync.io/)
+ - [`ESLint`](http://eslint.org/)
  - [`Gulp`](http://gulpjs.com/)
  - [`Flow`](https://flowtype.org/)
 
@@ -20,7 +23,7 @@ npm i
 ```
 ##### Build the client:
 ```bash
-npm run serve:dist
+npm run build
 ```
 ### Run
 ##### Build and serve the client on port `3000`
