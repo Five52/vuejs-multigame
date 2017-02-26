@@ -7,7 +7,7 @@
       <div class="answers" :class="{ answered }">
         <div
           v-for="choice in calculus.answers"
-          class="answer" :class="[choice.class]"
+          class="answer" :class="[choice.class, (table ? 'more' : '')]"
           @click="checkAnswer($event, choice)">{{ choice.value }}</div>
       </div>
     </div>
@@ -68,6 +68,11 @@
     border-radius: 4px;
     font-size: 2em;
     transition: background-color .25s;
+
+    &.more {
+      width: calc(20% - 12px);
+      margin-bottom: 12px;
+    }
 
     .answered & {
       cursor: default;
